@@ -70,28 +70,35 @@
           <!-- /.box -->
         </div>
         <div class="col-xs-6">
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <strong>Selamat!</strong> {{ session('success') }}
+        </div>
+        @endif
             <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Form Jabatan</h3>
             </div>  
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
-                
+            <form action="{{ route('jabatan.store') }}" method="POST" class="form-horizontal">
+            @csrf
               <div class="box-body">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Jabatan</label>
-
                   <div class="col-sm-10">
-                    <input type="nama_jabatan" class="form-control" id="inputEmail3" placeholder="isi jabatan">
-                  </div>
-                </div>
-               
+                    <input type="text" name="nama_jabatan" class="form-control" value="{{ old('nama_jabatan') }}" placeholder="isi jabatan">
+                     @error('nama_jabatan')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    </div>  
+                </div>  
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="reset" class="btn btn-default">Reset</button>
-                <button type="submit" class="btn btn-info pull-right">Sign in</button>
+                <button type="submit" class="btn btn-info pull-right">Submit</button>
               </div>
               <!-- /.box-footer -->
             </form>   

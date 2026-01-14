@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jabatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\HtmlString;
 
 class JabatanController extends Controller
 {
@@ -36,6 +37,19 @@ class JabatanController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
+        $request->validate([
+            'nama_jabatan' => 'required|unique:jabatan|string|max:255',
+        ],[
+            'nama_jabatan.required' => 'Kolom jabatan wajib di isi.',  
+            'nama_jabatan.unique' => 'Kolom jabatan sudah ada sebelumnya.',                              
+            'nama_jabatan.string' => 'Kolom jabatan harus berupa karakter.',
+            'nama_jabatan.max' => 'Kolom jabatan maksimal 255 karakter.',        
+        ]);     
+
+        $saveJabatan = Jabatan::create($request->all());
+        $message = new HtmlString("Jabatan <b>{$request->nama_jabatan}</b> berhasil dibuat.");
+        return redirect()->route('jabatan.index')->with('success', $message);
     }
 
     /**
