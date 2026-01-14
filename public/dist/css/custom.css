@@ -1,0 +1,85 @@
+/* pastikan main-header cukup tinggi */
+.main-header {
+    position: relative;
+    z-index: 1000;
+}
+
+/* navbar putih */
+.main-header > .navbar {
+    position: relative;
+    z-index: 1002;
+}
+
+/* navbar secondary di bawah */
+.navbar.secondary {
+    position: relative;
+    z-index: 1001;
+    margin-top: 0;
+    background-color: #2f2f2f;
+}
+.navbar-form.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#navbar-search-input {
+    width: 250px;
+}
+.main-header #navbar-search-input.form-control {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.2em;
+    width: 300px;
+}
+a {
+    color: #818f97;
+}
+
+.glyphicon.glyphicon-search.form-control-feedback{
+    color: #818f97;
+}
+
+.small-icon {
+    font-size: 9px;   /* kecilkan icon */
+    margin-left: 3px;  /* jarak dari icon user */
+    vertical-align: middle;
+}
+.navbar.navbar-static-top.secondary{
+    color:white;
+}
+
+/* ===== Navbar Secondary ===== */
+.navbar.secondary {
+    background-color: #333; /* opsional, contoh */
+}
+
+/* warna link */
+.navbar.secondary .nav > li > a {
+    color: #fff;
+}
+
+/* hover */
+.navbar.secondary .nav > li > a:hover,
+.navbar.secondary .nav > li > a:focus {
+    background-color: #ff851b;
+    color: #fff;
+}
+
+/* ACTIVE menu */
+.navbar.secondary .nav > li.active > a,
+.navbar.secondary .nav > li.active > a:hover,
+.navbar.secondary .nav > li.active > a:focus {
+    background-color: #ff851b; /* ORANGE ala AdminLTE */
+    color: #fff;
+}
+
+/* dropdown open */
+.navbar.secondary .nav > li.open > a {
+    background-color: #ff851b;
+    color: #fff;
+}
+
+/* .container.secondary {
+    background-color: white;
+} */
