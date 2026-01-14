@@ -47,7 +47,7 @@ class JabatanController extends Controller
             'nama_jabatan.max' => 'Kolom jabatan maksimal 255 karakter.',        
         ]);     
 
-        $saveJabatan = Jabatan::create($request->all());
+        Jabatan::create($request->all());
         $message = new HtmlString("Jabatan <b>{$request->nama_jabatan}</b> berhasil dibuat.");
         return redirect()->route('jabatan.index')->with('success', $message);
     }
@@ -58,6 +58,13 @@ class JabatanController extends Controller
     public function show(Jabatan $jabatan)
     {
         //
+        // dd($jabatan->id);
+        $getDataJabatan = Jabatan::get();
+        $detailData = null;
+        if ($jabatan) {
+            $detailData = Jabatan::find($jabatan->id);
+        }
+        return view('pages.jabatan.index', compact('getDataJabatan','detailData'));
     }
 
     /**
@@ -66,6 +73,12 @@ class JabatanController extends Controller
     public function edit(Jabatan $jabatan)
     {
         //
+        $getDataJabatan = Jabatan::get();
+        $editData = null;
+        if ($jabatan) {
+            $editData = Jabatan::find($jabatan->id);
+        }
+        return view('pages.jabatan.index', compact('getDataJabatan','editData'));
     }
 
     /**
@@ -74,6 +87,21 @@ class JabatanController extends Controller
     public function update(Request $request, Jabatan $jabatan)
     {
         //
+        $request->validate([
+            'nama_jabatan' => 'required|unique:jabatan|string|max:255',
+        ],[
+            'nama_jabatan.required' => 'Kolom jabatan wajib di isi.',  
+            'nama_jabatan.unique' => 'Kolom jabatan sudah ada sebelumnya.',                              
+            'nama_jabatan.string' => 'Kolom jabatan harus berupa karakter.',
+            'nama_jabatan.max' => 'Kolom jabatan maksimal 255 karakter.',        
+        ]);     
+
+        Jabatan::where('id', $jabatan->id)->update([
+            'nama_jabatan' => $request->nama_jabatan,
+        ]);
+        
+        $message = new HtmlString("Jabatan <b>{$jabatan->nama_jabatan}</b> berhasil diubah menjadi <b>{$request->nama_jabatan}</b>.");
+        return redirect()->route('jabatan.index')->with('success', $message);
     }
 
     /**
@@ -82,5 +110,8 @@ class JabatanController extends Controller
     public function destroy(Jabatan $jabatan)
     {
         //
+        $jabatan->delete();
+        $message = new HtmlString("Jabatan <b>{$jabatan->nama_jabatan}</b> berhasil dihapus.");
+        return redirect()->route('jabatan.index')->with('success', $message);
     }
 }

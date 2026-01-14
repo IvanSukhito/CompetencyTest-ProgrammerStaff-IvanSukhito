@@ -44,23 +44,26 @@
                   <th>Aksi</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody> 
+                <?php $no=1;?>
                 @forelse($getDataJabatan as $data)
                 <tr>
-                  <td>{{$data->id}}</td>
+                  <td>{{$no++}}</td>
                   <td>{{$data->nama_jabatan}}</td>
                   <td>
                     <div class="btn-group">
-                        <a href="#" class="btn btn-info btn-sm">Detail</a>
-                        <a href="#" class="btn btn-warning btn-sm">Ubah</a>
-                        <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                        <a href="{{ route('jabatan.show', ['jabatan' => $data->id]) }}" class="btn btn-info btn-sm">Detail</a>
+                        <a href="{{ route('jabatan.edit', ['jabatan' => $data->id]) }}" class="btn btn-warning btn-sm">Ubah</a>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete-{{ $data->id }}">
+                            Hapus
+                        </button>
                     </div>
                   </td>
                 </tr>
                 @empty
-                    <tr>
-                      <td colspan="4" class="text-center">Tidak menemukan data.</td>
-                    </tr>
+                <tr>
+                  <td colspan="4" class="text-center">Tidak menemukan data.</td>
+                </tr>
                 @endforelse
               </tbody>
             </table>
@@ -69,26 +72,33 @@
           </div>
           <!-- /.box -->
         </div>
+
+        <!-- form -->
         <div class="col-xs-6">
-        @if(session('success'))
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <strong>Selamat!</strong> {{ session('success') }}
-        </div>
-        @endif
-            <div class="box box-info">
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Selamat!</strong> {{ session('success') }}
+            </div>
+            @endif
+            <div class="box {{ isset($editData) ? 'box-primary': (isset($detailData) ? 'box-warning' : 'box-info') }}">
             <div class="box-header with-border">
-              <h3 class="box-title">Form Jabatan</h3>
+                <h3 class="box-title">
+                {{ isset($editData) ? 'Edit Jabatan' : (isset($detailData) ? 'Detail Jabatan' : 'Form Tambah Jabatan') }}                
+                </h3>
             </div>  
             <!-- /.box-header -->
             <!-- form start -->
-            <form action="{{ route('jabatan.store') }}" method="POST" class="form-horizontal">
+            <form action="{{ isset($editData) ? route('jabatan.update', $editData->id) : route('jabatan.store') }}" method="POST" class="form-horizontal">
             @csrf
+            @if(isset($editData))
+                @method('PUT') 
+            @endif
               <div class="box-body">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Jabatan</label>
                   <div class="col-sm-10">
-                    <input type="text" name="nama_jabatan" class="form-control" value="{{ old('nama_jabatan') }}" placeholder="isi jabatan">
+                    <input type="text" name="nama_jabatan" class="form-control" value="{{ $editData->nama_jabatan ?? ($detailData->nama_jabatan ?? old('nama_jabatan'))  }}" placeholder="isi jabatan" {{ isset($detailData) ? 'readonly' : '' }}>
                      @error('nama_jabatan')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -97,8 +107,15 @@
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="reset" class="btn btn-default">Reset</button>
-                <button type="submit" class="btn btn-info pull-right">Submit</button>
+                @if(isset($detailData) || isset($editData))
+                    <a href="{{ route('jabatan.index') }}" class="btn btn-default">Kembali</a>
+                @else
+                    <button type="reset" class="btn btn-default">Reset</button>
+                @endif 
+
+                @if(!isset($detailData))
+                    <button type="submit" class="btn btn-info pull-right">Simpan</button>
+                @endif
               </div>
               <!-- /.box-footer -->
             </form>   
@@ -108,4 +125,30 @@
       <!-- /.content -->
     </div>
     <!-- /.container -->
+
+    <!-- modal -->
+    @foreach($getDataJabatan as $data)
+    <div class="modal fade in" id="delete-{{ $data->id }}">
+      <div class="modal-dialog">
+        <form method="POST" class="modal-content" action="{{ route('jabatan.destroy', $data->id) }}">
+        @method('DELETE')
+        @csrf  
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Default Modal</h4>
+          </div>
+          <div class="modal-body">
+            <b>{{ $data->nama_jabatan }}</b><p>Akan dihapus, Apakah anda yakin ?</p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
+            <button type="submit" class="btn btn-danger">Hapus</button>
+          </div>
+        </form>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    @endforeach
 @endsection
