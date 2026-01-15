@@ -18,3 +18,8 @@ Route::resource('kota', KotaController::class)->parameters([
     'kota' => 'kota' 
 ]);;
 
+Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
+Route::get('/karyawan/dataTable', [KaryawanController::class, 'dataTable'])->name('ajax.karyawan.dataTable');
+Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
+Route::post('/karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
+

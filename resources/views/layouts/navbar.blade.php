@@ -19,7 +19,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#">User</a></li>
                 <li><a href="{{ route('jabatan.index') }}">Role</a></li>
-                <li><a href="#">Employee</a></li>
+                <li><a href="{{ route('karyawan.index') }}">Employee</a></li>
                 <li><a href="{{ route('kota.index') }}">City</a></li>
               
               </ul>
@@ -32,3 +32,4 @@
       </div>
       <!-- /.container-fluid -->
     </nav>
+    

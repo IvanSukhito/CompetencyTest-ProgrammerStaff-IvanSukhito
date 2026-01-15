@@ -99,7 +99,7 @@
                   <label for="inputEmail3" class="col-sm-2 control-label">Jabatan</label>
                   <div class="col-sm-10">
                     <input type="text" name="nama_jabatan" class="form-control" value="{{ $editData->nama_jabatan ?? ($detailData->nama_jabatan ?? old('nama_jabatan'))  }}" placeholder="isi jabatan" {{ isset($detailData) ? 'readonly' : '' }}>
-                     @error('nama_jabatan')
+                    @error('nama_jabatan')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                     </div>  
