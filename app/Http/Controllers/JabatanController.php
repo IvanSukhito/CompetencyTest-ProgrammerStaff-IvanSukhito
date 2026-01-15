@@ -14,11 +14,9 @@ class JabatanController extends Controller
     public function index()
     {
         //
-        $getDataJabatan = Jabatan::get();
         $search = request()->get('keyword');
-        $getDataJabatan = Jabatan::when($search, function ($query, $search) {
-            return $query->where('nama_jabatan', 'like', "%{$search}%");
-        })->get();
+        $getDataJabatan = $this->searchQuery($search);
+
         return view('pages.jabatan.index', compact('getDataJabatan'));
     }
 
@@ -58,11 +56,14 @@ class JabatanController extends Controller
     public function show(Jabatan $jabatan)
     {
         //
-        // dd($jabatan->id);
-        $getDataJabatan = Jabatan::get();
+        // karena satu form index buat semua, jadi detail juga di index
+        // maka dari itu saya kirim data index ($getDataJabatan) semua dan data detailnya juga
+        $search = request()->get('keyword');
+        $getDataJabatan = $this->searchQuery($search);
+        // detail data untuk isset di view, supaya tau ada data detail yang di tampilkan
         $detailData = null;
         if ($jabatan) {
-            $detailData = Jabatan::find($jabatan->id);
+            $detailData = $jabatan;
         }
         return view('pages.jabatan.index', compact('getDataJabatan','detailData'));
     }
@@ -73,7 +74,9 @@ class JabatanController extends Controller
     public function edit(Jabatan $jabatan)
     {
         //
-        $getDataJabatan = Jabatan::get();
+        $search = request()->get('keyword');
+        $getDataJabatan = $this->searchQuery($search);
+
         $editData = null;
         if ($jabatan) {
             $editData = Jabatan::find($jabatan->id);
@@ -113,5 +116,17 @@ class JabatanController extends Controller
         $jabatan->delete();
         $message = new HtmlString("Jabatan <b>{$jabatan->nama_jabatan}</b> berhasil dihapus.");
         return redirect()->route('jabatan.index')->with('success', $message);
+    }
+
+    private function searchQuery($search)
+    {
+         
+        if($search){
+            $getDataJabatan = Jabatan::where('nama_jabatan','like',"%$search%")->paginate(10);   
+        }else{
+            $getDataJabatan = Jabatan::get();
+        }
+
+        return $getDataJabatan;
     }
 }

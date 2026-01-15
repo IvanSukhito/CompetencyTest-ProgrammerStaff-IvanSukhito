@@ -96,7 +96,7 @@
             @endif
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Jabatan</label>
+                  <label for="nama_jabatan" class="col-sm-2 control-label">Jabatan</label>
                   <div class="col-sm-10">
                     <input type="text" name="nama_jabatan" class="form-control" value="{{ $editData->nama_jabatan ?? ($detailData->nama_jabatan ?? old('nama_jabatan'))  }}" placeholder="isi jabatan" {{ isset($detailData) ? 'readonly' : '' }}>
                     @error('nama_jabatan')

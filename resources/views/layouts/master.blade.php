@@ -34,7 +34,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="../../index2.html" class="navbar-brand" style="color:black;"><b>CRM</b></a>
+          <a href="{{ route('beranda') }}" class="navbar-brand" style="color:black;"><b>CRM</b></a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -115,7 +115,7 @@
       <div class="pull-right hidden-xs">
         <b>Version</b> 2.4.13
       </div>
-      <strong>Copyright &copy; 2014-2019 Template di dapat dari <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
+      <strong>Copyright &copy; 2014-2026 Template di dapat dari <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
       reserved.
     </div>
     <!-- /.container -->

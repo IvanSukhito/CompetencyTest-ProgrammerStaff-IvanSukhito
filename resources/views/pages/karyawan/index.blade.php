@@ -8,8 +8,8 @@
           Data Karyawan
         </h1>
         <ol class="breadcrumb">
-          <li><a href="{{ route('beranda') }}"><i class="fa fa-home"></i> Home</a></li>
-          <li><a href="#">Karyawan</a></li>
+          <li><a href="{{ route('beranda') }}"><i class="fa fa-home"></i>Home</a></li>
+          <li><a href="{{ route('karyawan.index') }}">Karyawan</a></li>
           <li class="active">List</li>
         </ol>
       </section>

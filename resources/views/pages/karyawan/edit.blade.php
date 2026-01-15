@@ -111,8 +111,7 @@
 <!-- Select2 -->
 <script src="{{ asset('bower_components/select2/dist/js/select2.full.min.js')}}"></script>
 <script>
-  $(function () {
-    //Initialize Select2 Elements       
+  $(function () {     
     $('.select2').select2()
     })
 </script>   

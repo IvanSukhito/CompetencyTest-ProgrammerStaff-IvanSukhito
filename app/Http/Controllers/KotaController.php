@@ -15,11 +15,9 @@ class KotaController extends Controller
     public function index()
     {
         //
-        $getDataKota = Kota::get();
         $search = request()->get('keyword');
-        $getDataKota = Kota::when($search, function ($query, $search) {
-            return $query->where('nama_kota', 'like', "%{$search}%");
-        })->get();
+        $getDataKota = $this->searchQuery($search);
+
         return view('pages.kota.index', compact('getDataKota'));
     }
 
@@ -37,7 +35,7 @@ class KotaController extends Controller
     public function store(Request $request)
     {
         //
-           $request->validate([
+        $request->validate([
             'nama_kota' => 'required|unique:kota|string|max:255',
         ],[
             'nama_kota.required' => 'Kolom kota wajib di isi.',  
@@ -57,7 +55,9 @@ class KotaController extends Controller
     public function show(Kota $kota)
     {
         //
-        $getDataKota = Kota::get();
+        $search = request()->get('keyword');
+        $getDataKota = $this->searchQuery($search);
+
         $detailData = null;
         if ($kota) {
             $detailData = Kota::find($kota->id);
@@ -71,7 +71,9 @@ class KotaController extends Controller
     public function edit(Kota $kota)
     {
         //
-        $getDataKota = Kota::get();
+        $search = request()->get('keyword');
+        $getDataKota = $this->searchQuery($search);
+
         $editData = null;
         if ($kota) {
             $editData = Kota::find($kota->id);
@@ -111,5 +113,17 @@ class KotaController extends Controller
         $kota->delete();
         $message = new HtmlString("Kota <b>{$kota->nama_kota}</b> berhasil dihapus.");
         return redirect()->route('kota.index')->with('success', $message);
+    }
+    
+    private function searchQuery($search)
+    {
+         
+        if($search){
+            $getDataKota = Kota::where('nama_kota','like',"%$search%")->paginate(10);   
+        }else{
+            $getDataKota = Kota::get();
+        }
+
+        return $getDataKota;
     }
 }

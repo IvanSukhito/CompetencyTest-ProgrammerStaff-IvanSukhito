@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KotaController;
@@ -9,7 +10,6 @@ Route::get('/', function () {
     return view('pages.beranda');
 })->name('beranda');
 
-// karyawannya doang yang manual
 
 Route::resource('jabatan', JabatanController::class)->parameters([
     'jabatan' => 'jabatan' 
@@ -27,3 +27,12 @@ Route::get('/karyawan/{karyawan}/edit', [KaryawanController::class, 'edit'])->na
 Route::put('/karyawan/{karyawan}', [KaryawanController::class, 'update'])->name('karyawan.update');
 Route::delete('/karyawan/{karyawan}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
 
+// function kalkulasi tanggal
+Route::post('/kalkulasi', function (Request $request){
+    
+    $date1 = $request->date_1;
+    $date2 = $request->date_2;
+
+    $hasil = kalkulasiTanggal2($date1, $date2);
+    return view('pages.beranda', ['hasil' => $hasil]);
+})->name('kalkulasi-tanggal');

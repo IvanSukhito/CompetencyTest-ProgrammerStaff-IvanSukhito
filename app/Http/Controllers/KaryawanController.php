@@ -8,7 +8,8 @@ use App\Models\Jabatan;
 use App\Models\Kota;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\HtmlString;
-// use Yajra\DataTables\Facades\DataTables; 
+use Carbon\Carbon;
+
 
 class KaryawanController extends Controller
 {
@@ -27,7 +28,11 @@ class KaryawanController extends Controller
     public function dataTable(Request $request)
     {
         $query = Karyawan::select('karyawan.*')->with(['jabatan', 'kota']);
-        return DataTables::of($query)->addColumn('aksi', function ($karyawan) {
+        
+        return DataTables::of($query)
+        ->editColumn('tanggal_lahir', function($row) {
+            return Carbon::parse($row->tanggal_lahir)->translatedFormat('d F Y');
+        })->addColumn('aksi', function ($karyawan) {
             return view('pages.karyawan.aksi', compact('karyawan'))->render();
         })->rawColumns(['aksi'])->make(true);
     }
@@ -68,12 +73,12 @@ class KaryawanController extends Controller
     Public function show (Karyawan $karyawan)
     {
         //
-        $getDataKaryawan = Karyawan::with(['jabatan', 'kota'])->find($karyawan->id);
-        $detailData = null;
-        if ($karyawan) {
-            $detailData = Karyawan::with(['jabatan', 'kota'])->find($karyawan->id);
-        }
-        return view('pages.karyawan.details', compact('getDataKaryawan', 'detailData'));
+        $karyawan->load(['jabatan', 'kota']);
+        $karyawan->tanggal_lahir = Carbon::parse($karyawan->tanggal_lahir)->translatedFormat('d F Y');
+
+        $getDataKaryawan = $karyawan;
+        
+        return view('pages.karyawan.details', compact('getDataKaryawan'));
     }
     public function edit(Karyawan $karyawan)
     {
@@ -82,7 +87,7 @@ class KaryawanController extends Controller
         $getDataKota = Kota::all();
         $editData = null;
         if ($karyawan) {
-            $editData = Karyawan::find($karyawan->id);
+            $editData = $karyawan->load(['jabatan', 'kota']);
         }
         return view('pages.karyawan.edit', compact('getDataJabatan','getDataKota', 'editData'));
     }
