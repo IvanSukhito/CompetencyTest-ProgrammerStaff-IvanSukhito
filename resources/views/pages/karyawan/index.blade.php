@@ -61,6 +61,30 @@
       <!-- /.content -->
  </div>
     <!-- /.container -->
+   @foreach($getDataKaryawan as $data)
+    <div class="modal fade in" id="delete-{{ $data->id }}">
+      <div class="modal-dialog">
+        <form method="POST" class="modal-content" action="{{ route('karyawan.destroy', $data->id) }}">
+        @method('DELETE')
+        @csrf  
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span></button>
+            <h4 class="modal-title">Hapus Data</h4>
+          </div>
+          <div class="modal-body">
+            <b>{{ $data->nama_karyawan }}</b><p>Akan dihapus, Apakah anda yakin ?</p>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
+            <button type="submit" class="btn btn-danger">Hapus</button>
+          </div>
+        </form>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    @endforeach
 
 @endsection
 @section('footer-script')

@@ -6,7 +6,6 @@
           </a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="{{ request()->routeIs('beranda') ? 'active' : '' }}"><a href="{{ route('beranda') }}">Home</a></li>
@@ -21,15 +20,12 @@
                 <li class="{{ request()->routeIs('jabatan.index') ? 'active' : '' }}"><a href="{{ route('jabatan.index') }}">Role</a></li>
                 <li class="{{ request()->routeIs('karyawan.index') ? 'active' : '' }}"><a href="{{ route('karyawan.index') }}">Employee</a></li>
                 <li class="{{ request()->routeIs('kota.index') ? 'active' : '' }}"><a href="{{ route('kota.index') }}">City</a></li>
-              
               </ul>
             </li>
             <li><a href="#">Report</a></li>
           </ul>
         </div>
-        <!-- /.navbar-collapse -->
  
       </div>
-      <!-- /.container-fluid -->
     </nav>
     

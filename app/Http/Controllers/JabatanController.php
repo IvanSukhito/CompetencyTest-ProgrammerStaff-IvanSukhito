@@ -110,7 +110,6 @@ class JabatanController extends Controller
     public function destroy(Jabatan $jabatan)
     {
         //
-        dd($jabatan);
         $jabatan->delete();
         $message = new HtmlString("Jabatan <b>{$jabatan->nama_jabatan}</b> berhasil dihapus.");
         return redirect()->route('jabatan.index')->with('success', $message);
