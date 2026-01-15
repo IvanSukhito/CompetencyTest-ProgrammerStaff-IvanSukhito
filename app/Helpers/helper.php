@@ -49,7 +49,7 @@ function formatRupiah($angka) {
 
 // }
 
-function kalkulasiTanggal2($tanggalPertama, $tanggalKedua){
+function kalkulasiTanggal($tanggalPertama, $tanggalKedua){
 
 
     $tKedua = isset($tanggalKedua) ? $tanggalKedua : date('Y-m-d');
@@ -78,7 +78,7 @@ function kalkulasiTanggal2($tanggalPertama, $tanggalKedua){
     ];
 
     return $result;
-   
+
 }   
 
 ?>

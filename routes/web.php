@@ -33,6 +33,6 @@ Route::post('/kalkulasi', function (Request $request){
     $date1 = $request->date_1;
     $date2 = $request->date_2;
 
-    $hasil = kalkulasiTanggal2($date1, $date2);
+    $hasil = kalkulasiTanggal($date1, $date2);
     return view('pages.beranda', ['hasil' => $hasil]);
 })->name('kalkulasi-tanggal');
