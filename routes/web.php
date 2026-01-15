@@ -6,7 +6,7 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KotaController;
 
 Route::get('/', function () {
-    return view('layouts.master');
+    return view('pages.beranda');
 })->name('beranda');
 
 // karyawannya doang yang manual

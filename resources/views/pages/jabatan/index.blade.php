@@ -2,7 +2,7 @@
 
 @section('content')
  <div class="container">
-      <!-- Content Header (Page header) -->
+<!--  Header -->
       <section class="content-header">
         <h1>
           Data Jabatan

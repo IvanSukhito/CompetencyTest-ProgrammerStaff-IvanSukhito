@@ -1,5 +1,5 @@
  <div class="container">
-      <!-- Content Header (Page header) -->
+      <!--  Header -->
       <section class="content-header">
         <h1>
           Top Navigation

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 <div class="container">
-      <!-- Content Header (Page header) -->
+      <!--  Header -->
       <section class="content-header">
         <h1>
           Form Karyawan
