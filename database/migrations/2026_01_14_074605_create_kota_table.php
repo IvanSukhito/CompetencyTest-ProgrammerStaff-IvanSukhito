@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kota', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 255)->unique()->nullable();
+            $table->string('nama_kota', 255)->unique()->nullable();
             $table->timestamps();
         });
     }

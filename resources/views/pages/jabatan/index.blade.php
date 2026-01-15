@@ -84,7 +84,7 @@
             <div class="box {{ isset($editData) ? 'box-primary': (isset($detailData) ? 'box-warning' : 'box-info') }}">
             <div class="box-header with-border">
                 <h3 class="box-title">
-                {{ isset($editData) ? 'Edit Jabatan' : (isset($detailData) ? 'Detail Jabatan' : 'Form Tambah Jabatan') }}                
+                {{ isset($editData) ? 'Ubah Jabatan' : (isset($detailData) ? 'Detail Jabatan' : 'Form Tambah Jabatan') }}                
                 </h3>
             </div>  
             <!-- /.box-header -->

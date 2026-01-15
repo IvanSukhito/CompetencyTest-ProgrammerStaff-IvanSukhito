@@ -11,6 +11,10 @@ Route::get('/', function () {
 
 // karyawannya doang yang manual
 
-Route::resource('jabatan', JabatanController::class);
-
+Route::resource('jabatan', JabatanController::class)->parameters([
+    'jabatan' => 'jabatan' 
+]);
+Route::resource('kota', KotaController::class)->parameters([
+    'kota' => 'kota' 
+]);;
 
