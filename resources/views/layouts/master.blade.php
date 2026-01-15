@@ -101,14 +101,12 @@
 
   <!-- /.second navbar -->
   @include('layouts.navbar')
-
   </header>
     
-
-
   <div class="content-wrapper">
   @yield('content')
   </div>
+  
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="container">
