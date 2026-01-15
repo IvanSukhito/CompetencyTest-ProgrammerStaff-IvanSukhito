@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <label for="date_1" class="col-sm-4 control-label">Masukan Tanggal Pertama</label>
                     <div class="col-sm-6">
-                      <input type="date" class="form-control" id="date_1" name="date_1">
+                      <input type="date" class="form-control" id="date_1" name="date_1" value="{{ old('date_1') }}">
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                 <div class="form-group">
                     <label for="date_2" class="col-sm-4 control-label">Masukan Tanggal Kedua</label>
                     <div class="col-sm-6">
-                      <input type="date" class="form-control" id="date_2" name="date_2">
+                      <input type="date" class="form-control" id="date_2" name="date_2" value="{{ old('date_2') }}">
                     </div>
                 </div>
             </div>
