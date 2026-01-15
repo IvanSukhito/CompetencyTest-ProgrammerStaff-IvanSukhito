@@ -99,15 +99,13 @@
       </div>
     </nav>
 
-  <!-- /.second navbar -->
   @include('layouts.navbar')
   </header>
     
   <div class="content-wrapper">
   @yield('content')
   </div>
-  
-  <!-- /.content-wrapper -->
+
   <footer class="main-footer">
     <div class="container">
       <div class="pull-right hidden-xs">
@@ -116,10 +114,10 @@
       <strong>Copyright &copy; 2014-2026 Template di dapat dari <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
       reserved.
     </div>
-    <!-- /.container -->
+    
   </footer>
 </div>
-<!-- ./wrapper -->
+
 
 <!-- jQuery 3 -->
 <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
