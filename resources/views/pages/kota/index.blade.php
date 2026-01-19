@@ -45,10 +45,9 @@
                 </tr>
                 </thead>
                 <tbody> 
-                <?php $no=1;?>
                 @forelse($getDataKota as $data)
                 <tr>
-                  <td>{{$no++}}</td>
+                  <td>{{$loop->iteration}}</td>
                   <td>{{$data->nama_kota}}</td>
                   <td>
                     <div class="btn-group">
@@ -67,6 +66,9 @@
                 @endforelse
               </tbody>
             </table>
+            </div>
+             <div class="box-footer">
+             {{ $getDataKota->links() }}
             </div>
             <!-- /.box-body -->
           </div>

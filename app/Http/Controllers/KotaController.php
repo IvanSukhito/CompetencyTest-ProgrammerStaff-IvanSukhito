@@ -121,7 +121,7 @@ class KotaController extends Controller
         if($search){
             $getDataKota = Kota::where('nama_kota','like',"%$search%")->paginate(10);   
         }else{
-            $getDataKota = Kota::get();
+            $getDataKota = Kota::paginate(10);
         }
 
         return $getDataKota;
