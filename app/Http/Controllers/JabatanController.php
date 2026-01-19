@@ -124,7 +124,7 @@ class JabatanController extends Controller
         if($search){
             $getDataJabatan = Jabatan::where('nama_jabatan','like',"%$search%")->paginate(10);   
         }else{
-            $getDataJabatan = Jabatan::paginate(3);
+            $getDataJabatan = Jabatan::paginate(10);
         }
 
         return $getDataJabatan;
